@@ -1,9 +1,18 @@
 package main
 
 import (
-	"fmt"
+	"log"
+	"net/http"
+	"studyAI/config"
+	"studyAI/controllers/DashboardController"
 )
 
 func main() {
-	fmt.Println("hello world")
+	config.InitDatabase()
+
+	//dashboard
+	http.HandleFunc("/", DashboardController.Welcome)
+
+	log.Println("Server running on port 8080")
+	http.ListenAndServe(":8080", nil)
 }

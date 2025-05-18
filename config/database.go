@@ -1,14 +1,17 @@
-package database
+package config
 
 import (
 	"database/sql"
 	"fmt"
+	_ "github.com/go-sql-driver/mysql"
 )
 
-func InitDatabase() *sql.DB {
+var DB *sql.DB
+
+func InitDatabase() {
 	fmt.Println("Initializing database...")
 
-	dsn := ""
+	dsn := "root:root@tcp(localhost:3306)/studyAi"
 	db, err := sql.Open("mysql", dsn)
 
 	if err != nil {
@@ -22,6 +25,5 @@ func InitDatabase() *sql.DB {
 	}
 
 	fmt.Println("Successfully connected to database")
-
-	return db
+	DB = db
 }
